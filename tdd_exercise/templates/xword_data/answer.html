@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Answer</h1>
+<p>
+  {{ object.entry.entry_text }}
+</p>
+
+{% if success %}
+<h2>Congratulations!</h2>
+{% endif %}
+
+<p>
+  <a href="{% url 'xword_data:drill' %}">Try another clue</a>
+</p>
+{% endblock content %}

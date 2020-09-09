@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Clue {{ clue.id }}</h1>
+<p>
+  {{ clue.clue_text }}
+</p>
+<h2>Enter your answer below</h2>
+<form method="POST">
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit" value="submit" />
+</form>
+
+<a href="{% url 'xword_data:answer' clue.id %}">Go to answer</a>
+{% endblock content%}
