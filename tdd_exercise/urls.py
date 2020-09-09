@@ -16,7 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+import xword_data.views as views
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", include("xword_data.urls", namespace="xword_data"))
+    path("answer/<int:pk>",
+         views.AnswerView.as_view(),
+         name="xword-answer"),
+    path("", views.drill, name="xword-drill")
 ]

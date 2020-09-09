@@ -44,6 +44,6 @@ class Clue(models.Model):
         db_table = "clues"
 
     def __str__(self):
-        return f"{self.clue_text}"
+        return f"{self.clue_text} - {self.entry.entry_text}"
                                  
     

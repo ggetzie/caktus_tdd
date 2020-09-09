@@ -7,10 +7,33 @@
 </p>
 
 {% if success %}
-<h2>Congratulations!</h2>
+<h2>{{ object.entry.entry_text }} is the correct answer! You have now answered {{ request.session.correct }} (of {{ request.session.attempts}}) clues correctly</h2>
+{% endif %}
+
+{% if clue_count %}
+<table>
+  <thead>
+    <tr>
+      <th>Count</th>
+      <th>Entry</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for entry, count in clue_count %}
+    <tr>
+      <td>{{ count }}</td>
+      <td>{{ entry }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>
+  only appearance of this clue
+</p>
 {% endif %}
 
 <p>
-  <a href="{% url 'xword_data:drill' %}">Try another clue</a>
+  <a href="{% url 'xword-drill' %}">Try another clue</a>
 </p>
 {% endblock content %}

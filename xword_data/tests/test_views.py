@@ -83,7 +83,7 @@ class TestAnswerView(TestCase):
         # All clues in setup have the same text, any one chosen at random
         # should show the same table of stats for use of that clue.
         clue = Clue.objects.order_by("?").first()
-        response = self.client.get(reverse("xword-answer", args=(clue.pk,)))
+        response = self.client.get(reverse("xword-answer", args=[clue.pk]))
         self.assertEqual(200, response.status_code)
         soup = BeautifulSoup(response.content, features="html.parser")
         table = soup.find("table")
