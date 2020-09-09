@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
 import os
+import environ
+
+env = environ.Env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '1-(86s^q+e7j5+ez9qz@8)yr(kb2pzt!1eb+(7x=(c3)435k-a'
+SECRET_KEY = env("caktus_tdd_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -75,12 +78,17 @@ WSGI_APPLICATION = 'tdd_exercise.wsgi.application'
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+	"default": {
+		"ENGINE": "django.db.backends.postgresql_psycopg2",
+		"NAME": "caktus_tdd_db",
+		"USER": "caktus_tdd_user",
+		"PASSWORD": env("caktus_tdd_DB_PW"), 
+		"HOST": "localhost",
+		"PORT": "",                      
+	}
 }
 
+DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 # Password validation
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
